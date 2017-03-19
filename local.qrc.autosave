@@ -1,0 +1,6 @@
+<RCC>
+    <qresource lang="polish" prefix="/new/all">
+        <file>display.svg</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>
