@@ -1,6 +1,9 @@
 QT += core
-QT -= gui
+QT += gui
+QT += serialport
+QT += widgets
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
 TARGET = seba2
@@ -10,7 +13,7 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    ../../MEGA/Qt/seba/htwindow.cpp
+    htmainwindow.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -24,7 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 FORMS += \
-    ../../MEGA/Qt/seba/htwindow.ui
+    htmainwindow.ui
 
 HEADERS += \
-    ../../MEGA/Qt/seba/htwindow.h
+    htmainwindow.h
