@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gridLayoutWidget->setEnabled(connected);
     ui->ChartView->setEnabled(connected);
 
-
     updatePortList();
 
 
@@ -77,7 +76,7 @@ void MainWindow::Connect()
 //            QThread::sleep(3);
             QTimer::singleShot(2000,this, SLOT(getHTSettings()));
 //            getHTSettings();
-         getFirmvareVer();
+
         }
         else
             ui->statusBar->showMessage(tr("Can't open %1, error code %2")
@@ -114,11 +113,11 @@ void MainWindow::readSerial()
                     ,(list.at(0).toFloat() -90) /100
                     ,(list.at(1).toFloat() -90) /100
                     );
-    //    else if (str.startsWith("$SET$"))
-    //    {
-    //        ui->textBrowser->append("Settings "+str);
-    //        settingsProceed(str);
-    //    }
+        else if (str.startsWith("$SET$"))
+        {
+            ui->textBrowser->append("Settings "+str);
+            settingsProceed(str);
+        }
     else
         ui->textBrowser->append(str);
 }
@@ -200,13 +199,12 @@ void MainWindow::getHTSettings()
 {
     if(connected)
     {
-        ui->textBrowser->append("Bam");
         serial->blockSignals(true);
         serial->write("$GSET");
-        if (serial->waitForBytesWritten(500))
+        if (serial->waitForBytesWritten(2000))
         {
             // read response
-            if (serial->waitForReadyRead(500))
+            if (serial->waitForReadyRead(2000))
             {
                 QByteArray responseData = serial->readAll();
                 while (serial->waitForReadyRead(10))
@@ -226,6 +224,7 @@ void MainWindow::getHTSettings()
                                        .arg(QTime::currentTime().toString()),5000);
         }
         serial->blockSignals(false);
+        getFirmvareVer();
     }
 
 

@@ -39,7 +39,7 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     calibratedialog.ui \
-    ../seba2/htmainwindow.ui
+
 
 RESOURCES += \
     local.qrc
